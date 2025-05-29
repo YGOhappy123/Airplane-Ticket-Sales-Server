@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import io.github.palexdev.mfxresources.fonts.MFXFontIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="650.0" prefWidth="1100.0" styleClass="rootPane" stylesheets="@../css/MainView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ygohappy123.server.controllers.MainController">
+    <HBox fx:id="windowHeader" alignment="CENTER_RIGHT" layoutY="6.0" prefHeight="50.0" prefWidth="1281.0" spacing="10.0" styleClass="navigation-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <padding>
+            <Insets right="10.0" />
+        </padding>
+        <MFXFontIcon fx:id="alwaysOnTopIcon" description="fas-circle" size="15.0" styleClass="always-on-top-icon" />
+        <MFXFontIcon fx:id="minimizeIcon" description="fas-circle" size="15.0" styleClass="minimize-icon" />
+        <MFXFontIcon fx:id="closeIcon" description="fas-circle" size="15.0" styleClass="close-icon" />
+    </HBox>
+    <VBox layoutX="254.0" layoutY="53.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+        <children>
+            <SplitPane dividerPositions="0.63" prefHeight="558.0" prefWidth="998.0" VBox.vgrow="ALWAYS">
+                <items>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                        <children>
+                            <MFXTableView fx:id="seatsTable" layoutX="72.0" layoutY="56.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        </children>
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                    </AnchorPane>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="521.0" prefWidth="499.0">
+                        <children>
+                            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <children>
+                                    <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                                        <children>
+                                            <Label alignment="CENTER" styleClass="notifyLabel" stylesheets="@../css/MainView.css" text="BẢNG THÔNG BÁO">
+                                                <font>
+                                                    <Font size="18.0" />
+                                                </font>
+                                                <VBox.margin>
+                                                    <Insets top="10.0" />
+                                                </VBox.margin>
+                                            </Label>
+                                        </children>
+                                    </VBox>
+                                    <MFXScrollPane fx:id="scrollPane" prefHeight="255.0" prefWidth="362.0" VBox.vgrow="ALWAYS">
+                                        <content>
+                                            <VBox fx:id="messageBox" prefHeight="393.0" prefWidth="358.0">
+                                                <children>
+                                                    <Label prefHeight="41.0" prefWidth="346.0" styleClass="notifyMessage" text="Thông báo!" wrapText="true">
+                                                    </Label>
+                                                </children>
+                                                <padding>
+                                                    <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                                                </padding>
+                                            </VBox>
+                                        </content>
+                                    </MFXScrollPane>
+                                </children>
+                                <padding>
+                                    <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                </padding>
+                            </VBox>
+                        </children>
+                    </AnchorPane>
+                </items>
+            </SplitPane>
+        </children>
+        <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+        </padding>
+    </VBox>
+</AnchorPane>

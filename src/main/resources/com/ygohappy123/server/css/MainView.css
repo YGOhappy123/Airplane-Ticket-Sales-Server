@@ -1,0 +1,174 @@
+@import 'MFXColors.css';
+
+/**************************************************
+ * Root
+**************************************************/
+.rootPane {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #ebebeb;
+    -fx-border-radius: 12;
+}
+
+/**************************************************
+ * Window Header
+**************************************************/
+.rootPane .navigation-bar {
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: rgba(0,0,0,0.1);
+    -fx-border-width: 1;
+}
+
+.rootPane .close-icon {
+    -mfx-color: -mfx-red;
+    -fx-opacity: 0.5;
+    -fx-cursor: hand;
+}
+
+.rootPane .close-icon:hover {
+    -fx-opacity: 1.0;
+}
+
+.rootPane .minimize-icon {
+    -mfx-color: #ffbf37;
+    -fx-opacity: 0.5;
+    -fx-cursor: hand;
+}
+
+.rootPane .minimize-icon:hover {
+    -fx-opacity: 1.0;
+}
+
+.rootPane .always-on-top-icon {
+    -mfx-color: #7a0ed9;
+    -fx-opacity: 0.5;
+    -fx-cursor: hand;
+}
+
+.rootPane .always-on-top-icon:hover {
+    -fx-opacity: 1.0;
+}
+
+.rootPane .always-on-top-icon:always-on-top {
+    -fx-opacity: 1.0;
+}
+
+/**************************************************
+ * Content Pane
+**************************************************/
+.contentPane {
+    -primary-color: #23A6F0;
+}
+
+.contentPane .heading {
+    -fx-padding: 4 0;
+    -fx-font-size: 20;
+    -fx-font-family: 'Roboto Bold'
+}
+
+.contentPane .contentWrapper {
+    -fx-padding: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: rgba(0,0,0,0.1);
+    -fx-border-width: 1;
+}
+
+.contentPane .addNewBtn {
+    -fx-padding: 15 40;
+    -fx-start-margin: 4px;
+    -fx-end-margin: 4px;
+    -fx-background-color: -primary-color;
+    -fx-border-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto Bold";
+    -fx-cursor: hand;
+}
+
+.contentPane .addNewBtn:hover {
+    -fx-background-color: rgba(35,166,240,0.7);
+}
+
+.contentPane .sortByLabel {
+    -fx-text-fill: #9B9999;
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 14;
+}
+
+.contentPane .viewModeIcon {
+    -fx-padding: 10;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-opacity: 0.7;
+}
+
+.contentPane .viewModeIcon.active,
+.contentPane .viewModeIcon:hover {
+    -fx-background-color: #E9E9E9;
+}
+
+.notifyLabel {
+    -fx-font-family: "Roboto Bold";
+    -fx-font-size: 30;
+}
+
+/**************************************************
+ * Override Default ComboBox CSS
+**************************************************/
+.contentPane .mfx-combo-box {
+    -fx-border-radius: 3;
+}
+
+.contentPane .mfx-combo-box:focus-within {
+    -mfx-purple: -primary-color;
+    -fx-text-fill: -primary-color;
+}
+
+.contentPane .mfx-combo-box:focus-within .caret .mfx-font-icon {
+    -mfx-color: -primary-color;
+    -fx-cursor: hand;
+}
+
+.contentPane .mfx-combo-box .combo-popup .virtual-flow .mfx-combo-box-cell:hover {
+    -fx-background-color: rgba(35,166,240,0.4);
+    -fx-cursor: hand;
+}
+
+.contentPane .mfx-combo-box .combo-popup .virtual-flow .mfx-combo-box-cell:selected {
+    -fx-background-color: -primary-color;
+}
+
+.check-in-form {
+    -fx-font-family: 'Roboto Regular';
+}
+
+.check-in-form .mfx-button {
+    -fx-cursor: hand;
+}
+
+.mfx-table-column-header {
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.custom {
+    -fx-font-family: 'Roboto Medium';
+    -fx-background-color: -mfx-purple;
+    -fx-text-fill: white;
+}
+
+.text-button {
+    -fx-font-family: 'Roboto Medium';
+    -fx-background-color: #F5F5F5;
+    -fx-border-color: #F5F5F5;
+    -fx-border-radius: 3;
+    -fx-text-fill: #737373;
+}
+
+.notifyMessage {
+    -fx-border-color: rgba(0,0,0,0.1);
+    -fx-border-width: 0 0 1 0;
+    -fx-font-size: 14;
+    -fx-padding: 10 12;
+}
