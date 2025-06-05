@@ -43,6 +43,8 @@ public class ReadServer extends Thread {
                         handleBookSeat(request);
                         break;
                     case "RETURN_SEAT":
+                        handleReturnSeat(request);
+                        break;
                     case "RELEASE_SEAT":
                         handleReleaseSeat(request);
                         break;
@@ -79,7 +81,7 @@ public class ReadServer extends Thread {
 
             JSONObject response = new JSONObject();
             if (result == 1) {
-                response.put("action", "UPDATE_SUCCESS");
+                response.put("action", "HOLD_SEAT_SUCCESS");
                 response.put("message", "Ghế đã được chọn thành công và được giữ cho bạn trong 30 giây. Sau 30 giây ghế sẽ được mở khóa.");
 
                 Platform.runLater(() -> controller.addNotification("Khách hàng " + socket.getInetAddress() + " đã chọn ghế số " + seatId));
@@ -104,13 +106,38 @@ public class ReadServer extends Thread {
 
             JSONObject response = new JSONObject();
             if (result == 1) {
-                response.put("action", "UPDATE_SUCCESS");
+                response.put("action", "BOOK_SEAT_SUCCESS");
                 response.put("message", "Ghế đã được mua thành công.");
 
                 Platform.runLater(() -> controller.addNotification("Khách hàng " + socket.getInetAddress() + " đã mua ghế số " + seatId));
             } else {
                 response.put("action", "UPDATE_FAILED");
                 response.put("message", "Ghế đã được chọn bởi khách hàng khác hoặc hết thời gian chờ 30 giây.");
+            }
+            sendToClient(response.toString());
+        } catch (Exception ex) {
+            System.out.println("Failed to update seat.");
+        }
+    }
+
+    private void handleReturnSeat(JSONObject request) {
+        int seatId = request.getInt("seatId");
+        String phoneNumber = request.getString("phoneNumber");
+
+        try {
+            int result = connector.executeUpdate(String.format("UPDATE dbo.Seats " +
+                    "SET Status = 'AVAILABLE', HoldExpiresAt = NULL, HeldByPhone = NULL " +
+                    "WHERE SeatId = %d AND Status = 'BOOKED' AND HeldByPhone = '%s';", seatId, phoneNumber));
+
+            JSONObject response = new JSONObject();
+            if (result == 1) {
+                response.put("action", "RETURN_SEAT_SUCCESS");
+                response.put("message", "Ghế đã hủy thành công.");
+
+                Platform.runLater(() -> controller.addNotification("Khách hàng " + socket.getInetAddress() + " đã hủy chọn ghế số " + seatId));
+            } else {
+                response.put("action", "UPDATE_FAILED");
+                response.put("message", "Ghế đã được chọn bởi khách hàng.");
             }
             sendToClient(response.toString());
         } catch (Exception ex) {
@@ -125,17 +152,17 @@ public class ReadServer extends Thread {
         try {
             int result = connector.executeUpdate(String.format("UPDATE dbo.Seats " +
                     "SET Status = 'AVAILABLE', HoldExpiresAt = NULL, HeldByPhone = NULL " +
-                    "WHERE SeatId = %d AND Status <> 'AVAILABLE' AND HeldByPhone = '%s';", seatId, phoneNumber));
+                    "WHERE SeatId = %d AND Status = 'HELD' AND HeldByPhone = '%s';", seatId, phoneNumber));
 
             JSONObject response = new JSONObject();
             if (result == 1) {
-                response.put("action", "UPDATE_SUCCESS");
+                response.put("action", "RELEASE_SEAT_SUCCESS");
                 response.put("message", "Ghế đã hủy chọn thành công.");
 
                 Platform.runLater(() -> controller.addNotification("Khách hàng " + socket.getInetAddress() + " đã hủy chọn ghế số " + seatId));
             } else {
                 response.put("action", "UPDATE_FAILED");
-                response.put("message", "Ghế đã được chọn bởi khách hàng khác hoặc hết thời gian chờ 30 giây.");
+                response.put("message", "Đã hết thời gian chờ 30 giây.");
             }
             sendToClient(response.toString());
         } catch (Exception ex) {
